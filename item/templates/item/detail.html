@@ -1,0 +1,35 @@
+{% extends "core/base.html" %} 
+{% block title %} 
+{{item.name}} 
+{% endblock title%} 
+{%block content %}
+
+<div class="w-full flex flex-col items-center justify-between">
+  <div class="flex items-center justify-between gap-24 w-4/5">
+    <div class="w-3/5">
+      <img src="{{item.image.url}}" alt="" />
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="title text-3xl">{{item.name}}</div>
+      <div class="description text-xl">{{item.description}}</div>
+      <div class="price text-emerald-500 font-bold">{{item.price}}</div>
+      {% if request.user == item.created_by %}
+      <a href='{% url "item:delete" item.id %}' class="w-3/4 px-8 py-2 bg-emerald-400 text-white text-center font-bold rounded-lg hover:bg-black">Delete item</a>
+      <a href='{% url "item:edit" item.id %}' class="w-3/4 px-8 py-2 bg-emerald-400 text-white text-center font-bold rounded-lg hover:bg-black">Edit item</a>
+      {% endif %}
+    </div>
+  </div>
+  <h2 class="text-5xl mt-10">Related Items:</h2>
+  <div class="flex items-center gap-10">
+    <div class="w-full flex items-center gap-10 flex-wrap mt-10">
+      {% for item in related_items %}
+        <a href="{% url 'item:detail' item.id  %}" class="h-full p-3 border-gray border-2">
+          <img src="{{ item.image.url }}" class="w-40 object-contain h-[200px]" alt="{{ item.name }} image">
+          <h2 class="text-xl" >{{ item.name }} </h2>
+          <p class="text-emerald-500 font-bold" >{{ item.price }} </p>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{%endblock content%}

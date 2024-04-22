@@ -1,0 +1,4 @@
+admin: 
+username: admin
+email: admin@mail.com
+password: Django123D

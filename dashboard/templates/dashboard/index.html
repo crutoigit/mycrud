@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <p class="mb-12 text-2xl text-center">My items</p>
+    {% if items %}
+    <div class="flex items-center gap-10">
+        <div class="w-full flex items-center gap-10 flex-wrap mt-10">
+            {% for item in items %}
+            <a href="{% url 'item:detail' item.id  %}" class="h-full p-3 border-gray border-2">
+                <img src="{{ item.image.url }}" class="w-40 object-contain h-[200px]" alt="{{ item.name }} image">
+                <h2 class="text-xl">{{ item.name }} </h2>
+                <p class="text-emerald-500 font-bold">{{ item.price }} </p>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="mb-12 text-2xl text-center text-red-500">You did not post any item yet!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

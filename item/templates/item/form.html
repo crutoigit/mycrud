@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% block title %}
+    {{ new_title }}
+{% endblock %}
+
+{% block content %}
+    <p class="text-3xl mb-5">{{new_title}}</p>
+
+    <form action="." method="post" class="flex flex-col gap-10" enctype="multipart/form-data">
+        {% csrf_token %} <!-- securitate -->
+        <!-- {{ from.as_p }} citirea formei ca paragraf cu template standart de forma -->
+        <div class="space-y-4"> {{ form.as_p }} </div>
+        
+        {% if form.errors or form.non_fields_errors %}
+            <div class="mb-3 text-rose-500 rounded-xl">
+                {% for field in form %}
+                    {{ field.errors }}
+                {% endfor %}
+            </div>
+            {{ form.non_fields_errors }}
+        {% endif %}
+        <input type="submit" value="Submit" class="bg-white px-12 py-2 text-black font-bold text-xl rounded-xl cursor-pointer
+        transition-all ease-in duration-100
+        hover:bg-emerald-600 hover:text-white">
+    </form>
+{% endblock %}
