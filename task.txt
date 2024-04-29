@@ -1,0 +1,4 @@
+
+
+1) Stilizati pagina de cautare 
+2) Creati logica de cumparare a produselor
